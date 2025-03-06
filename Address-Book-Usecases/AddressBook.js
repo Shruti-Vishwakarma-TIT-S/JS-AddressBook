@@ -199,6 +199,26 @@ class AddressBook {
     console.log("\nSorted Contacts Alphabetically by Name:");
     this.contacts.forEach((contact) => console.log(contact.toString()));
   }
+  // UC 12: Sort entries by City
+  sortByCity() {
+    this.contacts.sort((a, b) => a.city.toLowerCase().localeCompare(b.city.toLowerCase()));
+    console.log("\nContacts Sorted by City:");
+    this.contacts.forEach((contact) => console.log(contact.toString()));
+  }
+
+  // UC 12: Sort entries by State
+  sortByState() {
+    this.contacts.sort((a, b) => a.state.toLowerCase().localeCompare(b.state.toLowerCase()));
+    console.log("\nContacts Sorted by State:");
+    this.contacts.forEach((contact) => console.log(contact.toString()));
+  }
+
+  // UC 12: Sort entries by Zip
+  sortByZip() {
+    this.contacts.sort((a, b) => a.zip.localeCompare(b.zip)); // Compare zip codes as strings
+    console.log("\nContacts Sorted by Zip:");
+    this.contacts.forEach((contact) => console.log(contact.toString()));
+  }
 }
 
 // Create an instance of AddressBook
@@ -256,6 +276,15 @@ try {
   
   // UC11: Sort contacts alphabetically by name
   addressBook.sortContactsByName();
+
+  // UC12: Sort by City
+  addressBook.sortByCity();
+
+  // UC12: Sort by State
+  addressBook.sortByState();
+
+  // UC12: Sort by Zip
+  addressBook.sortByZip();
 } 
 catch (error) {
   console.error(error.message);
