@@ -88,6 +88,21 @@ class AddressBook {
         contact.lastName.toLowerCase() !== lastName.toLowerCase()
     );
   }
+
+  // UC4: Find an existing contact by name and edit it
+  editContact(firstName, lastName, updatedFields) {
+    const contact = this.contacts.find(
+      (contact) =>
+        contact.firstName.toLowerCase() === firstName.toLowerCase() &&
+        contact.lastName.toLowerCase() === lastName.toLowerCase()
+    );
+    if (contact) {
+      Object.assign(contact, updatedFields); // Update the contact's fields with the new data
+      console.log(`Contact updated: ${contact.displayInfo()}`);
+    } else {
+      console.error("Contact not found.");
+    }
+  }
 }
 
 // Create an instance of AddressBook
@@ -99,10 +114,24 @@ try {
   // Add a valid contact
   addressBook.addContact(new Contact("Jasmine", "Bake", "123 Mango street", "Shimla", "Kashmir", "62704", "5551234567", "bake@example.com"));
 
-  // Add an invalid contact to test validation (this will throw an error)
-  addressBook.addContact(new Contact("Ja", "B", "12 St", "Ci", "St", "abc", "12345", "invalid-email")); // UC2: Example of invalid contact
-} catch (error) {
-  console.error(error.message); // UC2: Catch and log errors
+  // Add an invalid contact to test validation
+  try {
+    addressBook.addContact(new Contact("Ja", "B", "12 St", "Ci", "St", "abc", "12345", "invalid-email")); // Invalid contact
+  } catch (error) {
+    console.error(`Failed to add contact: ${error.message}`); // Handle invalid input gracefully
+  }
+
+  // UC4 Edit an existing contact
+  console.log("\nEditing Contact:");
+  addressBook.editContact("Jasmine", "Bake", { address: "789 Orange St", city: "Manali", phone: "5559876543" });
+  
+  // List all contacts after editing
+  console.log("\nAddress Book After Editing:");
+  addressBook.listContacts();
+
+} 
+catch (error) {
+  console.error(error.message);
 }
 
 // List all contacts in the address book
