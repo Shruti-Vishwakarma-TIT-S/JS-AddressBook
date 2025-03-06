@@ -148,6 +148,24 @@ class AddressBook {
       console.log(`No contacts found in ${locationValue} (${locationType}).`);
     }
   }
+
+  // UC9: View persons grouped by City or State
+  viewPersonsByCityOrState(locationType) {
+    const groupedContacts = this.contacts.reduce((grouped, contact) => {
+      const key = locationType.toLowerCase() === "city" ? contact.city : contact.state;
+      if (!grouped[key]) {
+        grouped[key] = [];
+      }
+      grouped[key].push(contact);
+      return grouped;
+    }, {});
+
+    // Display the grouped contacts
+    for (const [key, persons] of Object.entries(groupedContacts)) {
+      console.log(`\n${locationType}: ${key}`);
+      persons.forEach((person) => console.log(person.displayInfo()));
+    }
+  }
 }
 
 // Create an instance of AddressBook
@@ -189,6 +207,14 @@ try {
   // UC8: Search for contacts in West Bengal (state)
   console.log("\nSearching for contacts in West Bengal (State):");
   addressBook.searchByCityOrState("state", "West Bengal");
+
+  // UC9: View persons grouped by City
+  console.log("\nViewing Persons Grouped by City:");
+  addressBook.viewPersonsByCityOrState("city");
+
+  // UC9: View persons grouped by State
+  console.log("\nViewing Persons Grouped by State:");
+  addressBook.viewPersonsByCityOrState("state");
 } 
 catch (error) {
   console.error(error.message);
