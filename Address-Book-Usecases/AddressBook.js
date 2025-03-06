@@ -133,6 +133,21 @@ class AddressBook {
   getContactCount() {
     return this.contacts.reduce((count) => count + 1, 0); // Reduce function counts all contacts
   }
+  // UC8: Search for persons in a particular city or state
+  searchByCityOrState(locationType, locationValue) {
+    const filteredContacts = this.contacts.filter((contact) =>
+      locationType.toLowerCase() === "city"
+        ? contact.city.toLowerCase() === locationValue.toLowerCase()
+        : contact.state.toLowerCase() === locationValue.toLowerCase()
+    );
+
+    if (filteredContacts.length > 0) {
+      console.log(`Contacts in ${locationValue} (${locationType}):`);
+      filteredContacts.forEach((contact) => console.log(contact.displayInfo()));
+    } else {
+      console.log(`No contacts found in ${locationValue} (${locationType}).`);
+    }
+  }
 }
 
 // Create an instance of AddressBook
@@ -141,9 +156,10 @@ const addressBook = new AddressBook();
 // UC2 : Test adding and removing contacts with invalid inputs
  
 try {
-  // Add a valid contact
-  addressBook.addContact(new Contact("Jasmine", "Bake", "123 Mango street", "Shimla", "Kashmir", "62704", "5551234567", "bake@example.com"));
-
+ // Add contacts
+  addressBook.addContact(new Contact("Jasmine", "Bake", "123 Mango street", "Shimla", "Himachal Pradesh", "62704", "5551234567", "bake@example.com"));
+  addressBook.addContact(new Contact("Sujal", "Rathore", "456 Town", "Kolkata", "West Bengal", "60616", "5555678123", "sujal@example.com"));
+  addressBook.addContact(new Contact("Amit", "Sharma", "789 Orange Street", "Shimla", "Himachal Pradesh", "62705", "5559876543", "amit@example.com"));
   // Add an invalid contact to test validation
   try {
     addressBook.addContact(new Contact("Ja", "B", "12 St", "Ci", "St", "abc", "12345", "invalid-email")); // Invalid contact
@@ -165,6 +181,14 @@ try {
   // UC5: Delete an existing contact
   console.log("\nDeleting Contact:");
   addressBook.deleteContact("Jasmine", "Bake");
+
+  // UC8: Search for contacts in Shimla (city)
+  console.log("\nSearching for contacts in Shimla (City):");
+  addressBook.searchByCityOrState("city", "Shimla");
+
+  // UC8: Search for contacts in West Bengal (state)
+  console.log("\nSearching for contacts in West Bengal (State):");
+  addressBook.searchByCityOrState("state", "West Bengal");
 } 
 catch (error) {
   console.error(error.message);
