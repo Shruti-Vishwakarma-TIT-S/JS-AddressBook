@@ -188,13 +188,23 @@ class AddressBook {
     console.log(countByState);
     return countByState;
   }
+  // UC11: Sort contacts alphabetically by name
+  sortContactsByName() {
+    this.contacts.sort((a, b) => {
+      const nameA = `${a.firstName} ${a.lastName}`.toLowerCase();
+      const nameB = `${b.firstName} ${b.lastName}`.toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+
+    console.log("\nSorted Contacts Alphabetically by Name:");
+    this.contacts.forEach((contact) => console.log(contact.toString()));
+  }
 }
 
 // Create an instance of AddressBook
 const addressBook = new AddressBook();
 
-// UC2 : Test adding and removing contacts with invalid inputs
- 
+// UC2 : Test adding and removing contacts with invalid inputs 
 try {
  // Add contacts
   addressBook.addContact(new Contact("Jasmine", "Bake", "123 Mango street", "Shimla", "Himachal Pradesh", "62704", "5551234567", "bake@example.com"));
@@ -243,6 +253,9 @@ try {
 
   // UC10: Count by State
   addressBook.countByState
+  
+  // UC11: Sort contacts alphabetically by name
+  addressBook.sortContactsByName();
 } 
 catch (error) {
   console.error(error.message);
