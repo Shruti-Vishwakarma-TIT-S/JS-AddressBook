@@ -55,6 +55,7 @@ class AddressBook {
   }
 
   // Add a new contact to the address book
+  // UC3 Add a new contact to the address book
   addContact(contact) {
     try {
       this.contacts.push(contact); // UC2: Handle invalid contacts gracefully
@@ -92,7 +93,8 @@ class AddressBook {
 // Create an instance of AddressBook
 const addressBook = new AddressBook();
 
-// UC2 : Test adding and removing contacts with invalid inputs 
+// UC2 : Test adding and removing contacts with invalid inputs
+ 
 try {
   // Add a valid contact
   addressBook.addContact(new Contact("Jasmine", "Bake", "123 Mango street", "Shimla", "Kashmir", "62704", "5551234567", "bake@example.com"));
