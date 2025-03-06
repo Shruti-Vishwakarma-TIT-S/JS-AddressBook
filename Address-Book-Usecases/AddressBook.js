@@ -118,6 +118,11 @@ class AddressBook {
       console.error(`Contact not found: ${firstName} ${lastName}`);
     }
   }
+
+  // UC6: Find the number of contacts in the address book using reduce
+  getContactCount() {
+    return this.contacts.reduce((count) => count + 1, 0); // Reduce function counts all contacts
+  }
 }
 
 // Create an instance of AddressBook
@@ -143,6 +148,9 @@ try {
   // List all contacts after editing
   console.log("\nAddress Book After Editing:");
   addressBook.listContacts();
+
+  // UC6: Get the count of contacts using the reduce function
+  console.log(`\nNumber of Contacts in Address Book: ${addressBook.getContactCount()}`);
 
   // UC5: Delete an existing contact
   console.log("\nDeleting Contact:");
