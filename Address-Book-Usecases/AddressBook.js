@@ -103,6 +103,21 @@ class AddressBook {
       console.error("Contact not found.");
     }
   }
+
+  // UC5: Find a person by name and delete them from the array
+  deleteContact(firstName, lastName) {
+  const initialLength = this.contacts.length;
+    this.contacts = this.contacts.filter(
+      (contact) =>
+        contact.firstName.toLowerCase() !== firstName.toLowerCase() ||
+        contact.lastName.toLowerCase() !== lastName.toLowerCase()
+    );
+    if (this.contacts.length < initialLength) {
+      console.log(`Contact deleted: ${firstName} ${lastName}`);
+    } else {
+      console.error(`Contact not found: ${firstName} ${lastName}`);
+    }
+  }
 }
 
 // Create an instance of AddressBook
@@ -129,6 +144,9 @@ try {
   console.log("\nAddress Book After Editing:");
   addressBook.listContacts();
 
+  // UC5: Delete an existing contact
+  console.log("\nDeleting Contact:");
+  addressBook.deleteContact("Jasmine", "Bake");
 } 
 catch (error) {
   console.error(error.message);
