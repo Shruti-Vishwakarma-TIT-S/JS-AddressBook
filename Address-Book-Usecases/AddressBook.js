@@ -55,13 +55,23 @@ class AddressBook {
   }
 
   // Add a new contact to the address book
-  // UC3 Add a new contact to the address book
+  // UC3: Add a new contact to the address book with UC7 duplicate check
   addContact(contact) {
-    try {
-      this.contacts.push(contact); // UC2: Handle invalid contacts gracefully
-    } catch (error) {
-      console.error(`Failed to add contact: ${error.message}`); // UC2: Display error message
+  // UC7: Check for duplicates using filter
+    const isDuplicate = this.contacts.filter(
+      (existingContact) =>
+        existingContact.firstName.toLowerCase() === contact.firstName.toLowerCase() &&
+        existingContact.lastName.toLowerCase() === contact.lastName.toLowerCase()
+    ).length > 0;
+
+    if (isDuplicate) {
+      console.error(`Duplicate Entry: A contact with the name ${contact.firstName} ${contact.lastName} already exists.`);
+      return;
     }
+
+    // If not duplicate, add the contact
+    this.contacts.push(contact);
+    console.log(`Contact added: ${contact.displayInfo()}`);
   }
 
   // List all contacts in the address book
