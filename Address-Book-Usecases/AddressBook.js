@@ -166,6 +166,28 @@ class AddressBook {
       persons.forEach((person) => console.log(person.displayInfo()));
     }
   }
+
+  // UC10: Count contacts by City
+  countByCity() {
+    const countByCity = this.contacts.reduce((acc, contact) => {
+      acc[contact.city] = (acc[contact.city] || 0) + 1;
+      return acc;
+    }, {});
+    console.log("\nCount of Contacts by City:");
+    console.log(countByCity);
+    return countByCity;
+  }
+
+  // UC10: Count contacts by State
+  countByState() {
+    const countByState = this.contacts.reduce((acc, contact) => {
+      acc[contact.state] = (acc[contact.state] || 0) + 1;
+      return acc;
+    }, {});
+    console.log("\nCount of Contacts by State:");
+    console.log(countByState);
+    return countByState;
+  }
 }
 
 // Create an instance of AddressBook
@@ -215,6 +237,12 @@ try {
   // UC9: View persons grouped by State
   console.log("\nViewing Persons Grouped by State:");
   addressBook.viewPersonsByCityOrState("state");
+  
+  // UC10: Count by City
+  addressBook.countByCity();
+
+  // UC10: Count by State
+  addressBook.countByState
 } 
 catch (error) {
   console.error(error.message);
